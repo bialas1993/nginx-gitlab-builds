@@ -1,0 +1,20 @@
+server {
+    
+    listen   80 ; ## listen for ipv4; this line is default and implied
+    
+    server_name  "~^(?P<project>.+)\.domain\.xyz$";
+
+    index index.php index.html index.htm index.nginx-debian.html;
+
+    root /var/www/python/$project;
+
+    location ~ ^\/$ {
+           autoindex on;
+    }
+
+    location ~ ^\/([0-9]+)\/$ {
+         return 301 http://$1.$project.domain.xyz;
+    }
+}
+
+
